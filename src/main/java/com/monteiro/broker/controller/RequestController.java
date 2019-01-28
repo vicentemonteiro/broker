@@ -1,0 +1,51 @@
+package com.monteiro.broker.controller;
+
+import com.monteiro.broker.dao.RequestDAO;
+import com.monteiro.broker.model.Request;
+import com.monteiro.broker.simulator.MockData;
+import java.util.List;
+import org.apache.commons.collections4.IteratorUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ *
+ * @author vicente.monteiro
+ */
+@RestController
+public class RequestController {
+
+    @Autowired
+    RequestDAO requestD;
+
+    @Autowired
+    MockData mockD;
+
+    @RequestMapping("/request/save")
+    public Request save(@RequestBody final Request request) {
+        return this.requestD.save(request);
+    }
+
+    @RequestMapping("/request/view")
+    public Request view(@RequestParam final String id) {
+        return this.requestD.findById(Long.parseLong(id)).get();
+    }
+
+    @RequestMapping("/request/delete")
+    public void delete(@RequestParam final String id) {
+        this.requestD.deleteById(Long.parseLong(id));
+    }
+
+    @RequestMapping("/request/viewall")
+    public List<Request> viewAll() {
+        return IteratorUtils.toList(this.requestD.findAll().iterator());
+    }
+
+    @RequestMapping("/request/mock")
+    public void mock() {
+        this.mockD.mock();
+    }
+}
