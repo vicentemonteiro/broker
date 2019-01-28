@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TextWriter {
 
-    private final org.slf4j.Logger logger = getLogger(AutoBrokerService.class);
+    private final org.slf4j.Logger logger = getLogger(TextWriter.class);
 
     public void generateReport(final String text) {
         final PrintWriter writer;
