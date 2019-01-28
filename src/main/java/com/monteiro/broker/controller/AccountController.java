@@ -2,8 +2,11 @@ package com.monteiro.broker.controller;
 
 import com.monteiro.broker.dao.AccountDAO;
 import com.monteiro.broker.model.Account;
+import static java.lang.Long.parseLong;
 import java.util.Collection;
+import java.util.logging.Logger;
 import org.apache.commons.collections4.IteratorUtils;
+import static org.apache.commons.collections4.IteratorUtils.toList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,12 +30,13 @@ public class AccountController {
 
     @RequestMapping("/account/view")
     public Account view(@RequestParam final String id) {
-        return this.accountD.findById(Long.parseLong(id)).get();
+        return this.accountD.findById(parseLong(id)).get();
     }
 
     @RequestMapping("/account/viewall")
     public Collection<Account> viewAll() {
-        return IteratorUtils.toList(this.accountD.findAll().iterator());
+        return toList(this.accountD.findAll().iterator());
     }
+    private static final Logger LOG = Logger.getLogger(AccountController.class.getName());
 
 }

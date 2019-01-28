@@ -9,12 +9,18 @@ import com.monteiro.broker.model.Property;
 import com.monteiro.broker.model.Request;
 import com.monteiro.broker.simulator.PriceService;
 import com.monteiro.broker.util.TextWriter;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static java.lang.System.getProperty;
 import java.math.BigDecimal;
+import static java.math.BigDecimal.ZERO;
 import java.math.RoundingMode;
+import static java.math.RoundingMode.HALF_UP;
 import java.util.Date;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import static org.slf4j.LoggerFactory.getLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.mail.MailSender;
@@ -29,7 +35,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AutoBrokerService {
 
-    private final Logger logger = LoggerFactory.getLogger(AutoBrokerService.class);
+    private final Logger logger = getLogger(AutoBrokerService.class);
 
     @Autowired
     MailSender mailSender;
@@ -76,17 +82,17 @@ public class AutoBrokerService {
     //prepare and join the all entry
     private String getEntryReport() {
         final StringBuffer str = new StringBuffer();
-        final String linesep = System.getProperty("line.separator");
+        final String linesep = getProperty("line.separator");
         this.entryD.findAll().forEach((entry) -> {
-            str.append(entry + linesep);
+            str.append(entry).append(linesep);
         });
         this.accountD.findAll().forEach((account) -> {
-            str.append(account + linesep);
+            str.append(account).append(linesep);
         });
         return str.toString();
     }
 
-    @Scheduled(fixedDelay = 5000, initialDelay = 5000)
+    @Scheduled(fixedDelay = 5_000, initialDelay = 5_000)
     private void proceedRequests() {
         proceedRequest();
     }
@@ -106,17 +112,17 @@ public class AutoBrokerService {
     @Transactional
     private void buy(final Request request, final BigDecimal price) {
         final BigDecimal money = request.getAccount().getAvaiableMoney();
-        final BigDecimal amountCompany = money.divide(price, RoundingMode.HALF_UP);
+        final BigDecimal amountCompany = money.divide(price, HALF_UP);
 
-        if (amountCompany.compareTo(BigDecimal.ZERO) > 0) {
+        if (amountCompany.compareTo(ZERO) > 0) {
 
             //update the account money
             final Account account = request.getAccount();
-            account.setAvaiableMoney(BigDecimal.ZERO);
+            account.setAvaiableMoney(ZERO);
             this.accountD.save(account);
 
             //registry aquisition
-            final Entry entry = new Entry(new Date(), request, money, amountCompany, price, Boolean.TRUE);
+            final Entry entry = new Entry(new Date(), request, money, amountCompany, price, TRUE);
             this.entryD.save(entry);
 
             //update the property
@@ -140,7 +146,7 @@ public class AutoBrokerService {
             this.accountD.save(account);
 
             //registry sell
-            final Entry entry = new Entry(new Date(), request, value, prop.getAmountCompany(), price, Boolean.FALSE);
+            final Entry entry = new Entry(new Date(), request, value, prop.getAmountCompany(), price, FALSE);
             this.entryD.save(entry);
 
             //update the property
@@ -163,5 +169,6 @@ public class AutoBrokerService {
         message.setText(body);
         this.mailSender.send(message);
     }
+    private static final java.util.logging.Logger LOG = java.util.logging.Logger.getLogger(AutoBrokerService.class.getName());
 
 }

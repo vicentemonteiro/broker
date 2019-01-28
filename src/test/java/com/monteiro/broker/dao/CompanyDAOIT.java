@@ -7,7 +7,10 @@ package com.monteiro.broker.dao;
 
 import com.monteiro.broker.model.Company;
 import java.util.Optional;
+import static java.util.Optional.empty;
+import java.util.logging.Logger;
 import org.apache.commons.lang3.RandomStringUtils;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +33,13 @@ public class CompanyDAOIT {
     @Test
     @Before
     public void testInsert() {
-        assertNotNull(companyD.save(new Company(RandomStringUtils.randomAlphabetic(5))));
+        assertNotNull(companyD.save(new Company(randomAlphabetic(5))));
     }
 
     @Test
     public void testDelete() {
         this.companyD.deleteById(1L);
-        assertTrue(Optional.empty().equals(this.companyD.findById(1L)));
+        assertTrue(empty().equals(this.companyD.findById(1L)));
     }
+    private static final Logger LOG = Logger.getLogger(CompanyDAOIT.class.getName());
 }

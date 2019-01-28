@@ -2,10 +2,12 @@ package com.monteiro.broker.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
@@ -19,7 +21,7 @@ public class Request implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @ManyToOne(optional = false)
@@ -108,15 +110,13 @@ public class Request implements Serializable {
             return false;
         }
         final Request other = (Request) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this);
     }
+    private static final Logger LOG = Logger.getLogger(Request.class.getName());
 
 }

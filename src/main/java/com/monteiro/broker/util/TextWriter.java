@@ -4,7 +4,9 @@ import com.monteiro.broker.business.AutoBrokerService;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.logging.Logger;
 import org.slf4j.LoggerFactory;
+import static org.slf4j.LoggerFactory.getLogger;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TextWriter {
 
-    private final org.slf4j.Logger logger = LoggerFactory.getLogger(AutoBrokerService.class);
+    private final org.slf4j.Logger logger = getLogger(AutoBrokerService.class);
 
     public void generateReport(final String text) {
         final PrintWriter writer;
@@ -28,4 +30,5 @@ public class TextWriter {
         }
 
     }
+    private static final Logger LOG = Logger.getLogger(TextWriter.class.getName());
 }

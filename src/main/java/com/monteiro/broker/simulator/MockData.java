@@ -8,6 +8,7 @@ import com.monteiro.broker.model.Company;
 import com.monteiro.broker.model.Request;
 import java.math.BigDecimal;
 import java.util.Random;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MockData {
 
-    private static final Integer BASE_LOAD = 10000;
+    private static final Integer BASE_LOAD = 10_000;
     private static final String BASE_EMAIL = "vicente.baliu@gmail.com";
 
     private final Random rand = new Random();
@@ -51,4 +52,5 @@ public class MockData {
         this.requestD.save(new Request(new Company(3L), new BigDecimal("14.00"), new BigDecimal("13.00"), new Account(1L)));
         this.requestD.save(new Request(new Company(4L), new BigDecimal("15.00"), new BigDecimal("14.00"), new Account(1L)));
     }
+    private static final Logger LOG = Logger.getLogger(MockData.class.getName());
 }

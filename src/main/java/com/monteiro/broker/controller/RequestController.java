@@ -3,8 +3,12 @@ package com.monteiro.broker.controller;
 import com.monteiro.broker.dao.RequestDAO;
 import com.monteiro.broker.model.Request;
 import com.monteiro.broker.simulator.MockData;
+import static java.lang.Long.parseLong;
+import static java.lang.Long.parseLong;
 import java.util.List;
+import java.util.logging.Logger;
 import org.apache.commons.collections4.IteratorUtils;
+import static org.apache.commons.collections4.IteratorUtils.toList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,21 +35,22 @@ public class RequestController {
 
     @RequestMapping("/request/view")
     public Request view(@RequestParam final String id) {
-        return this.requestD.findById(Long.parseLong(id)).get();
+        return this.requestD.findById(parseLong(id)).get();
     }
 
     @RequestMapping("/request/delete")
     public void delete(@RequestParam final String id) {
-        this.requestD.deleteById(Long.parseLong(id));
+        this.requestD.deleteById(parseLong(id));
     }
 
     @RequestMapping("/request/viewall")
     public List<Request> viewAll() {
-        return IteratorUtils.toList(this.requestD.findAll().iterator());
+        return toList(this.requestD.findAll().iterator());
     }
 
     @RequestMapping("/request/mock")
     public void mock() {
         this.mockD.mock();
     }
+    private static final Logger LOG = Logger.getLogger(RequestController.class.getName());
 }

@@ -1,10 +1,12 @@
 package com.monteiro.broker.model;
 
 import java.io.Serializable;
+import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 
 /**
@@ -16,7 +18,7 @@ public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -62,15 +64,13 @@ public class Company implements Serializable {
             return false;
         }
         Company other = (Company) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
         return "com.monteiro.broker.model.Company[ id=" + id + " ]";
     }
+    private static final Logger LOG = Logger.getLogger(Company.class.getName());
 
 }

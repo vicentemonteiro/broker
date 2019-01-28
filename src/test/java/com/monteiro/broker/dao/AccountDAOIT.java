@@ -2,7 +2,10 @@ package com.monteiro.broker.dao;
 
 import com.monteiro.broker.model.Account;
 import java.math.BigDecimal;
+import static java.math.BigDecimal.ONE;
+import java.util.logging.Logger;
 import org.apache.commons.lang3.RandomStringUtils;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +28,8 @@ public class AccountDAOIT {
     @Test
     @Before
     public void testInsert() {
-        assertNotNull(accountD.save(new Account(BigDecimal.ONE, RandomStringUtils.randomAlphabetic(5))));
+        assertNotNull(accountD.save(new Account(ONE, randomAlphabetic(5))));
     }
+    private static final Logger LOG = Logger.getLogger(AccountDAOIT.class.getName());
 
 }
