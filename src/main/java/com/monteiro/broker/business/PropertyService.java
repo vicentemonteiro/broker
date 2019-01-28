@@ -4,7 +4,6 @@ import com.monteiro.broker.dao.PropertyDAO;
 import com.monteiro.broker.model.Property;
 import com.monteiro.broker.model.Request;
 import java.math.BigDecimal;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +34,5 @@ public class PropertyService {
     public void sell(final Property prop) {
         this.propD.delete(prop);
     }
-    private static final Logger LOG = Logger.getLogger(PropertyService.class.getName());
 
 }

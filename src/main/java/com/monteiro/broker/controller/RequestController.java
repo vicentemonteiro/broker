@@ -4,10 +4,7 @@ import com.monteiro.broker.dao.RequestDAO;
 import com.monteiro.broker.model.Request;
 import com.monteiro.broker.simulator.MockData;
 import static java.lang.Long.parseLong;
-import static java.lang.Long.parseLong;
 import java.util.List;
-import java.util.logging.Logger;
-import org.apache.commons.collections4.IteratorUtils;
 import static org.apache.commons.collections4.IteratorUtils.toList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,5 +49,4 @@ public class RequestController {
     public void mock() {
         this.mockD.mock();
     }
-    private static final Logger LOG = Logger.getLogger(RequestController.class.getName());
 }

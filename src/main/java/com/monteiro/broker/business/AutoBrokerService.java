@@ -14,12 +14,10 @@ import static java.lang.Boolean.TRUE;
 import static java.lang.System.getProperty;
 import java.math.BigDecimal;
 import static java.math.BigDecimal.ZERO;
-import java.math.RoundingMode;
 import static java.math.RoundingMode.HALF_UP;
 import java.util.Date;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import static org.slf4j.LoggerFactory.getLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -169,6 +167,5 @@ public class AutoBrokerService {
         message.setText(body);
         this.mailSender.send(message);
     }
-    private static final java.util.logging.Logger LOG = java.util.logging.Logger.getLogger(AutoBrokerService.class.getName());
 
 }

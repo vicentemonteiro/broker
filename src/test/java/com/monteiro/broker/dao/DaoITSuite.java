@@ -1,6 +1,5 @@
 package com.monteiro.broker.dao;
 
-import java.util.logging.Logger;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -15,5 +14,4 @@ import org.junit.runners.Suite;
 })
 public class DaoITSuite {
 
-    private static final Logger LOG = Logger.getLogger(DaoITSuite.class.getName());
 }

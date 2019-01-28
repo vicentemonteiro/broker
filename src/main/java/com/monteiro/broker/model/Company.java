@@ -1,11 +1,9 @@
 package com.monteiro.broker.model;
 
 import java.io.Serializable;
-import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 
@@ -71,6 +69,5 @@ public class Company implements Serializable {
     public String toString() {
         return "com.monteiro.broker.model.Company[ id=" + id + " ]";
     }
-    private static final Logger LOG = Logger.getLogger(Company.class.getName());
 
 }

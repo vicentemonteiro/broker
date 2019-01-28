@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import static org.slf4j.LoggerFactory.getLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -56,6 +55,5 @@ public class PriceServiceImpl implements PriceService {
         });
         this.logger.info("Price Update");
     }
-    private static final java.util.logging.Logger LOG = java.util.logging.Logger.getLogger(PriceServiceImpl.class.getName());
 
 }

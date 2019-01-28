@@ -3,8 +3,6 @@ package com.monteiro.broker.controller;
 import com.monteiro.broker.dao.EntryDAO;
 import com.monteiro.broker.model.Entry;
 import java.util.Collection;
-import java.util.logging.Logger;
-import org.apache.commons.collections4.IteratorUtils;
 import static org.apache.commons.collections4.IteratorUtils.toList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +22,4 @@ public class EntryController {
     public Collection<Entry> viewAll() {
         return toList(this.entryD.findAll().iterator());
     }
-    private static final Logger LOG = Logger.getLogger(EntryController.class.getName());
 }

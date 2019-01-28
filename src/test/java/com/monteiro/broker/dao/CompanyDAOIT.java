@@ -6,10 +6,7 @@
 package com.monteiro.broker.dao;
 
 import com.monteiro.broker.model.Company;
-import java.util.Optional;
 import static java.util.Optional.empty;
-import java.util.logging.Logger;
-import org.apache.commons.lang3.RandomStringUtils;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -41,5 +38,5 @@ public class CompanyDAOIT {
         this.companyD.deleteById(1L);
         assertTrue(empty().equals(this.companyD.findById(1L)));
     }
-    private static final Logger LOG = Logger.getLogger(CompanyDAOIT.class.getName());
+
 }
